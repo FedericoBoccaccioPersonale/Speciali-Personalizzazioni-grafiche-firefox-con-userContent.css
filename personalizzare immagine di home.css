@@ -1,0 +1,30 @@
+/* Da inserire in userContent.css */
+
+/* Per cambiare questa invece è necessario riavviare completamente il browser. */
+/* Nuova scheda */
+@-moz-document url("about:newtab")
+{
+	.logo
+	{
+		background-image: url("https://static.wikia.nocookie.net/sonic/images/c/c8/Sonic-generations--modern-tails---flight.png") !important;
+		background-size: contain !important; /* L' immagine viene automaticamente ridimensionata */
+	}
+}
+
+/* Lo sfondo della finestra anonima  */
+@-moz-document url("about:privatebrowsing")
+{
+	/* Sfondo verde | cambia pure colore */
+	body
+	{
+		background-color: #46b1ca !important;
+		background-image: none !important;
+	}
+
+	/* Sostituisci il logo */
+	.logo
+	{
+		background: url("immagine.jpg") !important; /* A causa di una illogica limitazione di FF, in questo caso l' immagine deve essere contenuta nella stessa cartella del file css */
+		background-size: contain !important; /* Questo funziona se è un' immagine quadrata */
+	}
+}
