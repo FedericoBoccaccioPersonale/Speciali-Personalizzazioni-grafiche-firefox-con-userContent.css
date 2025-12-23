@@ -1,0 +1,66 @@
+/* Da inserire in userContent.css */
+
+@-moz-document domain("protectedtext.com")
+{
+	/* Disattivo: verde + "Salvato ☑️" */
+	#button-save.ui-button-disabled,
+	#button-save.ui-state-disabled
+	{
+		opacity: 1 !important;
+		background-image: none !important;
+		background-color: green !important;
+		color: white !important;
+		min-width: 160px !important;
+	}
+	#button-save.ui-button-disabled .ui-button-text,
+	#button-save.ui-state-disabled .ui-button-text { visibility: hidden; position: relative; }
+	#button-save.ui-button-disabled .ui-button-text::before,
+	#button-save.ui-state-disabled .ui-button-text::before
+	{
+		content: "Salvato ☑️";
+		visibility: visible;
+		position: absolute;
+		left: 0; right: 0;
+		text-align: center;
+		width: 100%;
+		white-space: nowrap;
+	}
+
+	/* Attivo: lampeggio sfondo + "Salva ⚡" in rosso */
+	#button-save:not(.ui-button-disabled):not(.ui-state-disabled),
+	#button-save.ui-button.ui-state-default:not(.ui-button-disabled):not(.ui-state-disabled),
+	#button-save.ui-state-hover:not(.ui-button-disabled):not(.ui-state-disabled),
+	#button-save.ui-state-active:not(.ui-button-disabled):not(.ui-state-disabled)
+	{
+		display: inline-block !important;
+		min-width: 160px !important;
+		background-image: none !important;           /* rimuove i gradienti del tema */
+		transition: none !important;                 /* evita conflitti con animazione */
+		animation: blinkBg 0.8s infinite !important; /* lampeggio dello sfondo */
+		will-change: background-color;
+	}
+
+	/* Testo sostitutivo "Salva ⚡" Non tollera il grassetto o font-weight */
+	#button-save:not(.ui-button-disabled):not(.ui-state-disabled) .ui-button-text {	visibility: hidden; position: relative;	}
+	#button-save:not(.ui-button-disabled):not(.ui-state-disabled) .ui-button-text::before
+	{
+		content: "⚡ Salva ⚡";
+		visibility: visible;
+		position: absolute;
+		left: 0; right: 0;
+		top: 50%;                   /* metà altezza */
+		transform: translateY(-50%);/* risale di metà */
+		text-align: center;
+		color: red;
+		font-size: 15px;
+		font-weight: 900;
+	}
+
+	/* Lampeggio sfondo: giallo ↔ arancione (niente background-color statico sul bottone) */
+	@keyframes blinkBg
+	{
+		0%   { background-color: yellow; }
+		50%  { background-color: orange; }
+		100% { background-color: yellow; }
+	}
+}
