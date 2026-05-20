@@ -1,0 +1,41 @@
+/* Questo deve andare necessariamente in userChrome */
+/* Usiamo sia #context_duplicateTab che #context_duplicateTabs perché Firefox cambia identificativo a seconda che tu abbia selezionato una sola scheda o più schede contemporaneamente */
+
+
+
+/* ================= Opzione 1: emoji (che funziona male) ================= */
+
+/* Aggiunge un'emoji accanto alla voce Duplica scheda */
+#context_duplicateTab .menu-text::before,
+#context_duplicateTabs .menu-text::before
+{
+	content: "🗐 Duplica scheda" !important;
+}
+/* PROBLEMA: nonostante il selettore before, tutto il testo viene sostituito, quindi non basta aggiungere l' emoji */
+
+
+/* ================= Opzione 2: immagine ================= */
+
+/* Aggiunge un' immagine personalizzata come icona di sfondo */
+#context_duplicateTab,
+#context_duplicateTabs
+{
+    background-image: url("Oxygen-Icons.org-Oxygen-Actions-window-duplicate.16.png") !important; /* Dovrebbe funzionare anche con svg */
+    background-repeat: no-repeat !important;
+    background-position: 10px center !important; /* Regola la distanza dal bordo sinistro */
+    padding-left: 32px !important; /* Sposta il testo per non sovrapporlo all'icona */
+}
+/* Questo invece funziona senza dover inserire il testo completo */
+
+
+/* ================= Opzione 3: emoji corretta ================= */
+
+/* Applica l'emoji direttamente al tag del menù, senza toccare il testo */
+#context_duplicateTab::before,
+#context_duplicateTabs::before
+{
+	content: "🗐" !important;
+	margin-inline-end: 10px !important; /* Crea spazio tra l' emoji e il testo */
+	margin-inline-start: 4px !important; /* Allinea l'emoji al bordo sinistro */
+	display: inline-block !important;
+}

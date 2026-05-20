@@ -1,0 +1,39 @@
+/* Aggiungere un emoji al menù contestuale "Apri in nuova scheda contenitore" */
+
+/* ================= Opzione 1: emoji ================= */
+#context_reopenInContainer::before
+{
+	content: "☢" !important;
+	margin-inline-end: 10px !important; /* Crea spazio tra l' emoji e il testo */
+	margin-inline-start: 4px !important; /* Allinea l'emoji al bordo sinistro */
+	display: inline-block !important;
+}
+
+/*
+	Andare a prendere la stessa icona usata dall' estensione si è rivelato impossibile, pare che cambi ogni volta.
+	Però ho scoperto che per catturare le immagini dei sottomenù, che credo siano generate in HTML, stando alla mia (scarsa) esperienza con le estensioni, basta cliccare col destro sull' immagine e scegliere "Apri immagine in nuova scheda".
+	Quindi, se vuoi farlo, devi copiare l' immagine e metterla in quella cartella
+*/
+
+
+
+
+/* ================= Opzione 2: immagine (che è assurdamente più complicato) ================= */
+
+#context_reopenInContainer::before
+{
+	content: "" !important; /* 1. FONDAMENTALE: senza questo il ::before non esiste */
+	display: inline-block !important; /* Permette di dare larghezza e altezza */
+	width: 16px !important;  /* Larghezza dell'icona */
+	height: 16px !important; /* Altezza dell'icona */
+
+	/* Gestione Immagine */
+	background-image: url("container-openin-16.svg") !important; /* <----- Presente nel repository */
+	background-repeat: no-repeat !important;
+	background-size: contain !important; /* Forza l'SVG a ridimensionarsi nei 16px */
+	background-position: center !important;
+
+	/* Spaziature (Sostituiscono il padding che avevi messo) */
+	margin-inline-start: 4px !important;  /* Distanza dal bordo sinistro del menù */
+	margin-inline-end: 12px !important;  /* Spinge il testo del menù a destra di 12px */
+}
